@@ -13,7 +13,6 @@ import re
 
 model_local = ChatOllama(model="mistral")
 
-
 embedding_model = OllamaEmbeddings(model='nomic-embed-text')
 docs = [WebBaseLoader(url).load() for url in [
     "https://ollama.com/",
@@ -24,14 +23,11 @@ docs = [item for sublist in docs for item in sublist]
 for doc in docs:
     doc.metadata['access'] = 'all'  # For testing
 
-# Split documents
 splitter = CharacterTextSplitter.from_tiktoken_encoder(chunk_size=7500, chunk_overlap=100)
 split_docs = splitter.split_documents(docs)
 
-# Create vectorstore
 vectorstore = Chroma.from_documents(split_docs, embedding=embedding_model, collection_name="test-rag")
 
-# Create retriever
 retriever = vectorstore.as_retriever()
 
 aftertemplate = """You are a helpful assistant. Use the conversation history for the context of the conversation and the provided context i needed to answer the user's current question.
