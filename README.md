@@ -1,0 +1,1 @@
+A modular, locally hosted chatbot built with LangGraph and Ollama, supporting augmented Retrieval-Augmented Generation (RAG) for contextual question answering. It dynamically fetches and integrates content from websites, performs real-time augmentation, and executes locally using custom knowledge graphs and prompt routing.
